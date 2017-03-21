@@ -2,9 +2,7 @@ package main.java.by.training.nc.dev3.model;
 
 import java.io.Serializable;
 
-/**
- * Created by dima on 16.3.17.
- */
+
 public class User implements Serializable {
     private String login;
     private String password;
@@ -18,6 +16,10 @@ public class User implements Serializable {
         this.numberOfPassport = numberOfPassport;
         this.role = role;
         counterOfNewAccounts++;
+    }
+
+    public User(String login) {
+        this.login = login;
     }
 
     public User() {
@@ -62,6 +64,6 @@ public class User implements Serializable {
     }
 
     public void displayCountNewUsersPerSession(){
-        System.out.printf("Id: %d \n", id);
+        System.out.printf("Id: %d \n", counterOfNewAccounts);
     }
 }

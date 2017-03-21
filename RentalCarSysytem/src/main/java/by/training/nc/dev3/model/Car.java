@@ -54,4 +54,10 @@ public class Car implements Serializable{
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return String
+                .format("brand: %5s model: %5s ", brand, model);
+    }
 }

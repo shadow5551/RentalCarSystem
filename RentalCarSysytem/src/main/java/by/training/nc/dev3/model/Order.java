@@ -9,24 +9,22 @@ import java.util.Date;
  */
 public class Order implements Serializable {
     private int idOrder;
-    private String login;
-    private String brand;
-    private String model;
+    private Car car;
+    private User user;
     private Date dateofRefund;
     private String status;
 
-    public Order(int idOrder, String login, String brand, String model, Date dateofRefund, String status) {
+    public Order(int idOrder,Car car, User user, Date dateofRefund, String status) {
         this.idOrder = idOrder;
-        this.login = login;
-        this.brand = brand;
-        this.model = model;
+        this.car = car;
+        this.user = user;
         this.dateofRefund = dateofRefund;
         this.status = status;
     }
 
-
     public Order() {
     }
+
 
     public int getIdOrder() {
         return idOrder;
@@ -44,28 +42,22 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public String getLogin() {
-        return login;
+
+
+    public Car getCar() {
+        return car;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-    public String getBrand() {
-        return brand;
+    public User getUser() {
+        return user;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDateofRefund() {
@@ -75,9 +67,10 @@ public class Order implements Serializable {
     public void setDateofRefund(Date dateofRefund) {
         this.dateofRefund = dateofRefund;
     }
+
     @Override
     public String toString() {
         return String
-                .format("brand: %5s model: %5s date: %5s status: %5s ", brand, model, dateofRefund,status);
+                .format("brand: %5s model: %5s date: %5s status: %5s ", car.getBrand(), car.getModel(), dateofRefund,status);
     }
 }
