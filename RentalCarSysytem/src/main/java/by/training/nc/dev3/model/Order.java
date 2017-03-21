@@ -1,4 +1,4 @@
-package model;
+package main.java.by.training.nc.dev3.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
