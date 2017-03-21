@@ -1,4 +1,4 @@
-package main.java.by.training.nc.dev3.model;
+package model;
 
 import java.io.Serializable;
 
