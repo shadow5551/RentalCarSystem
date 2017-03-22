@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String numberOfPassport;
     private String role;
     private transient static int counterOfNewAccounts=1;
+    private int ammount;
 
     public User(String login, String password, String numberOfPassport, String role) {
         this.login = login;
@@ -23,6 +24,14 @@ public class User implements Serializable {
     }
 
     public User() {
+    }
+
+    public int getAmmount() {
+        return ammount;
+    }
+
+    public void setAmmount(int ammount) {
+        this.ammount = ammount;
     }
 
     public String getLogin() {

@@ -1,6 +1,7 @@
 package main.java.by.training.nc.dev3.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -70,7 +71,8 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
+        SimpleDateFormat date_format = new SimpleDateFormat("MMM dd,yyyy");
         return String
-                .format("brand: %5s model: %5s date: %5s status: %5s ", car.getBrand(), car.getModel(), dateofRefund,status);
+                .format("brand: %5s model: %5s date: %5s status: %5s ", car.getBrand(), car.getModel(), date_format.format(dateofRefund),status);
     }
 }
