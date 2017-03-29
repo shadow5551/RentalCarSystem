@@ -74,7 +74,7 @@ public class AuthorisedUserEvent extends AuthorisedEvent{
         if (userService.getListForCategory(super.ordersList,OrderStatus.RENTED)){
             userService.payForRepairCar(super.ordersList);
         }else {
-            System.out.println("Нет");
+            System.out.println("Нет машин, которые вы сдали");
         }
     }
 
@@ -119,7 +119,7 @@ public class AuthorisedUserEvent extends AuthorisedEvent{
         if (userService.getListForCategory(super.ordersList,OrderStatus.ACCEPTED)){
             userService.userOrders(OrderStatus.ACCEPTED);
         }else {
-            System.out.println("Нет");
+            System.out.println("Нет машин, которые вы арендуете");
         }
     }
 

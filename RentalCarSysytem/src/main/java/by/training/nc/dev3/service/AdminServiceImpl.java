@@ -43,28 +43,31 @@ public class AdminServiceImpl implements AdminService {
         writeFile.delete("Order.txt");
         Scanner in = new Scanner(System.in);
         System.out.println("Для работы с заказами нажмите 1 , для выхода нажмите любую клавишу");
+        int tempValue;
         if (in.next().equals("1")) {
             System.out.println("Введите номер заказа:");
             do {
-                while (!scanner.hasNextInt())
-                {
+                while (!scanner.hasNextInt()) {
                     System.out.println("Повторите ввод");
                     scanner.next();
                 }
-                    int idOrder = scanner.nextInt() - 1;
-                    if ((orderList.size() > idOrder) & (idOrder >= 0)) {
-                        if (orderStatus.equals(orderList.get(idOrder).getStatus()))
-                            if (orderStatus.equals(OrderStatus.PROCESS)) {
-                                actionWithInProgressOrder(orderList.get(idOrder), idOrder);
-                            }
+                tempValue = scanner.nextInt();
+                int idOrder = tempValue - 1;
+                if ((orderList.size() > idOrder) & (idOrder >= 0)) {
+                    if (orderStatus.equals(orderList.get(idOrder).getStatus())) {
+                        if (orderStatus.equals(OrderStatus.PROCESS)) {
+                            actionWithInProgressOrder(orderList.get(idOrder), idOrder);
+                        }
                         if (orderStatus.equals(OrderStatus.RENTED)) {
                             actionWithRentedOrder(orderList.get(idOrder), idOrder);
                         }
                         break;
                     }
-                    System.out.println("Такого id нет в списке!");
-            } while (true);
+                }
+                System.out.println("Такого id нет в списке!");
+            } while (tempValue!=0);
         }
+        saveChanges();
     }
 
     private void actionWithRentedOrder(Order order, int idOrder) {
@@ -82,7 +85,6 @@ public class AdminServiceImpl implements AdminService {
                     setStatusOrder(order, idOrder, OrderStatus.CLOSED);
                     break;
                 case "3":
-                    saveChanges();
                     break;
                 default:
                     flag = true;
@@ -112,7 +114,6 @@ public class AdminServiceImpl implements AdminService {
                     rejectOrder(order, idOrder);
                     break;
                 case "3":
-                    saveChanges();
                     break;
                 default:
                     flag = true;
@@ -124,22 +125,23 @@ public class AdminServiceImpl implements AdminService {
     private void setStatusOrder(Order order, int idOrder, OrderStatus orderStatus) {
         order.setStatus(orderStatus);
         orderList.set(idOrder, order);
-        saveChanges();
+        //saveChanges();
     }
 
     /**
      * Метод для изменения статуса забронированной машины
+     *
      * @param order   - заказ
      * @param idOrder - ключ заказа
      */
     public void issueInvoice(Order order, int idOrder) {
-        System.out.println(" Для снятия деньги за ремонт нажмите 1 , для ");
+        System.out.println(" Для снятия деньги за ремонт нажмите 1 , для выхода нажмите любую клавишу");
         if (scanner.next().equals("1")) {
             System.out.print("Введите счет за ремонт ");
             while (!scanner.hasNextInt()) scanner.next();
             int price = scanner.nextInt();
             System.out.println("Укажите причину взымания платы");
-            order.setClarification(scanner.nextLine());
+            order.setClarification(scanner.next());
             order.setStatus(OrderStatus.REPAIRED);
             order.setRepairPrice(price);
             setStatusOrder(order, idOrder, order.getStatus());
@@ -197,12 +199,14 @@ public class AdminServiceImpl implements AdminService {
     public boolean getListForCategory(List<Order> ordersList, OrderStatus orderStatus) {
         boolean flag = false;
         for (Order order : ordersList) {
-            if (order.getStatus().equals(OrderStatus.REJECTED) || order.getStatus().equals(OrderStatus.REPAIRED)) {
-                System.out.println("user:" + order.getUser().getLogin() + "  " + order.toString() + " reason: " + order.getClarification());
-                flag=true;
-            } else if (order.getStatus().equals(orderStatus)) {
+            if (order.getStatus().equals(orderStatus)) {
+                if (order.getClarification().isEmpty()) {
                     System.out.println("user:" + order.getUser().getLogin() + "  " + order.toString());
                     flag = true;
+                } else {
+                    System.out.println("user:" + order.getUser().getLogin() + "  " + order.toString() + " reason: " + order.getClarification());
+                    flag = true;
+                }
             }
         }
         return flag;

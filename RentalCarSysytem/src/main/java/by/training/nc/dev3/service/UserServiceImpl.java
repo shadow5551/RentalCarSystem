@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
                 }
             } while (true);
         }
+        saveChanges();
     }
 
     private void actionWithAcceptedOrder(Order order, int idOrder) {
@@ -97,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
     private void closeOrder(Order order, int idOrder) {
         //System.out.println("Укажите причину отказа");
-       // order.setClarification(scanner.nextLine());
+        // order.setClarification(scanner.nextLine());
         order.setStatus(OrderStatus.RENTED);
         returnService.returnMoneyAndCar(order);
         setStatusOrder(order, idOrder, order.getStatus());
@@ -110,10 +111,10 @@ public class UserServiceImpl implements UserService {
         System.out.println("введите количество дополнительных дней");
         while (!scanner.hasNextInt()) scanner.next();
         int days = scanner.nextInt();
-        if (currentUser.getBalance()-order.getCar().getPricePerDay()*days<0){
+        if (currentUser.getBalance() - order.getCar().getPricePerDay() * days < 0) {
             System.out.println("Ага, бабки сначала кинб на карточку , а потом продлевай свой зказа");
-        }else {
-            currentUser.setBalance(currentUser.getBalance()-order.getCar().getPricePerDay()*days);
+        } else {
+            currentUser.setBalance(currentUser.getBalance() - order.getCar().getPricePerDay() * days);
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(order.getRefundDate());
             calendar.add(Calendar.DAY_OF_MONTH, days);
@@ -160,14 +161,14 @@ public class UserServiceImpl implements UserService {
                             if (currentUser.getBalance() < ordersList.get(idOrder).getRepairPrice()) {
                                 System.out.println("Недостаточно средств для оплаты ремонта заказа №" + idOrder);
                             } else {
-                               // ReplaceFileContents replaceFileContents = new ReplaceFileContents();
+                                // ReplaceFileContents replaceFileContents = new ReplaceFileContents();
                                 currentUser.setBalance(currentUser.getBalance() - ordersList.get(idOrder).getRepairPrice());
                                 userDao.update(currentUser);
                                 //replaceFileContents.replaceUser("User.txt", currentUser);
                                 Order order = ordersList.get(idOrder);
                                 order.setStatus(OrderStatus.CLOSED);
                                 orderDao.update(order);
-                               // replaceFileContents.replaceOrder("Order.txt", order);
+                                // replaceFileContents.replaceOrder("Order.txt", order);
                                 System.out.println("Оплата за ремонт произведена успешна");
                             }
                             break;
@@ -183,7 +184,7 @@ public class UserServiceImpl implements UserService {
     private void setStatusOrder(Order order, int idOrder, OrderStatus orderStatus) {
         order.setStatus(orderStatus);
         orderList.set(idOrder, order);
-        saveChanges();
+        //saveChanges();
     }
 
     void saveChanges() {
@@ -195,12 +196,14 @@ public class UserServiceImpl implements UserService {
     public boolean getListForCategory(List<Order> ordersList, OrderStatus orderStatus) {
         boolean flag = false;
         for (Order order : ordersList) {
-            if (order.getStatus().equals(OrderStatus.REJECTED) || order.getStatus().equals(OrderStatus.REPAIRED)) {
-                System.out.println(order.toString() + " reason: " + order.getClarification());
-                flag =true;
-            } else if (order.getStatus().equals(orderStatus)) {
-                System.out.println(order.toString());
-                flag=true;
+            if (order.getStatus().equals(orderStatus)) {
+                if (order.getClarification().isEmpty()) {
+                    System.out.println(order.toString());
+                    flag = true;
+                } else {
+                    System.out.println(order.toString() + " reason: " + order.getClarification());
+                    flag = true;
+                }
             }
         }
         return flag;

@@ -59,7 +59,7 @@ public class OrderDaoImpl implements Dao {
         carList.get(idCar).setCountOfCars(carList.get(idCar).getCountOfCars() - 1);
         carDao.update(carList.get(idCar));
         currentUser.setBalance(currentUser.getBalance() - priceOrder);
-        System.out.println("Заказ дабавлен");
+        System.out.println("Заказ добавлен");
         writeFile.writeItem(order, "Order.txt");
         return true;
     }

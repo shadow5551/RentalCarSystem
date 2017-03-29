@@ -27,6 +27,10 @@ public class OrderValidator {
             System.out.println("Неверно введено количество дней");
             return false;
         }
+        if (Integer.parseInt(map.get("countOfDays"))<=0){
+            System.out.println("Неверно введено количество дней");
+            return false;
+        }
         if (!validateIdCar(Integer.parseInt(map.get("idCar")))) {
             return false;
         }

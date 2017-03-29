@@ -32,7 +32,7 @@ public class ReturnService {
                 User user = userList.get(i);
                 if (order.getStatus().equals(OrderStatus.REJECTED)) {
                     user.setBalance(userList.get(i).getBalance() + order.getPrice());
-                }else if (order.getStatus().equals(OrderStatus.REJECTED)){
+                }else if (order.getStatus().equals(OrderStatus.RENTED)){
                     Calendar calendar = new GregorianCalendar();
                     Date currentDate = calendar.getTime();
                     calendar.setTime(currentDate);

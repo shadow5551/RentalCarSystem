@@ -15,6 +15,10 @@ public class CarValidator {
                 System.out.println("Ошибка при вводе цены за авто!");
                 return false;
             }
+        if (Integer.parseInt(map.get("pricePerDay"))<=0){
+            System.out.println("Ошибка при вводе цены за авто!");
+            return false;
+        }
         return true;
     }
 }
