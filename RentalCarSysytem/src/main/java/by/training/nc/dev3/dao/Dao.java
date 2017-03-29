@@ -1,5 +1,7 @@
 package main.java.by.training.nc.dev3.dao;
 
+import main.java.by.training.nc.dev3.model.User;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  */
 public interface Dao<T> {
     List<T> getAll();
-    T update(T object);//при подключении к бд поменять на ключ сущности
+    void update(T object);
     boolean delete(T object);
     boolean create();
 }

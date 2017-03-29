@@ -19,6 +19,10 @@ public class ReadFile implements Reader,Serializable {
     private List<Car> carList = new ArrayList<>();
     private List<Order> orderList = new ArrayList<>();
 
+    /**
+     *
+     * @param nameOfFile
+     */
     @Override
     public void readItem(String nameOfFile) {
         try {

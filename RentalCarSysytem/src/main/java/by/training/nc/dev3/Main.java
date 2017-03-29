@@ -1,5 +1,7 @@
-package main.java.by.training.nc.dev3.views;
+package main.java.by.training.nc.dev3;
 
+
+import main.java.by.training.nc.dev3.views.UnauthorisedUserEvent;
 
 /**
  * Created by dima on 14.3.17.

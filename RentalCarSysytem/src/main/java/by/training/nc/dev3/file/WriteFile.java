@@ -11,6 +11,11 @@ import java.util.List;
  */
 public class WriteFile implements Writer {
 
+    /**
+     *
+     * @param object
+     * @param nameOfFile
+     */
     @Override
     public void writeItem(Object object, String nameOfFile) {
         File file = new File (nameOfFile);
@@ -39,6 +44,10 @@ public class WriteFile implements Writer {
         for (Order order:list){
             writeItem(order,nameOfFile);
         }
+    }
+
+    public  void delete(String nameFile) {
+        new File(nameFile).delete();
     }
 
     private static class AppendableObjectOutputStream extends ObjectOutputStream {

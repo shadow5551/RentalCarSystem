@@ -21,9 +21,25 @@ public class UserDaoImpl implements Dao {
         return readFile.getUserList();
     }
 
+
+
     @Override
-    public Object update(Object object) {
-        return null;
+    public void update(Object object) {
+        User user = (User) object;
+        WriteFile writeFile = new WriteFile();
+        ReadFile readFile = new ReadFile();
+        readFile.readItem("User.txt");
+        List<User> usersList = readFile.getUserList();
+        writeFile.delete("User.txt");
+        for (int i = 0; i < usersList.size(); i++) {
+            if (usersList.get(i).equals(user))
+            {
+                usersList.set(i,user);
+            }
+        }
+        for (User tempUser : usersList) {
+            writeFile.writeItem(tempUser, "User.txt");
+        }
     }
 
     @Override
@@ -47,7 +63,7 @@ public class UserDaoImpl implements Dao {
                 hashmap.put("passport", in.next());
                 System.out.println("Роль");
                 hashmap.put("role", in.next());
-                user = new User(hashmap.get("login"), hashmap.get("password"), hashmap.get("passport"),hashmap.get("role"));
+                user = new User(hashmap.get("login"), hashmap.get("password"), hashmap.get("passport"),hashmap.get("role"),1000);
             } while (!sighUpValidator.validate(user));
         } catch (Exception e) {
             return false;
