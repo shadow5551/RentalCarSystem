@@ -1,0 +1,52 @@
+package main.java.by.training.nc.dev3.exception;
+
+/**
+ * Created by dima on 18.3.17.
+ */
+public class CustomGenericException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+    public CustomGenericException() {
+        super();
+    }
+
+    public CustomGenericException(String message, Throwable cause) {
+        super(message,cause);
+    }
+
+    public CustomGenericException(String message) {
+        super(message);
+    }
+
+    public CustomGenericException(Throwable cause) {
+        super(cause);
+    }
+
+
+    /*public String getErrCode() {
+        return errCode;
+    }
+
+    public void setErrCode(String errCode) {
+        this.errCode = errCode;
+    }
+
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public CustomGenericException(String errCode, String errMsg) {
+        this.errCode = errCode;
+        this.errMsg = errMsg;
+    }
+
+    public CustomGenericException(String errMsg) {
+        this.errMsg = errMsg;
+    }*/
+
+}
