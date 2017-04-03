@@ -3,7 +3,6 @@ package main.java.by.training.nc.dev3.service;
 import main.java.by.training.nc.dev3.dao.OrderDaoImpl;
 import main.java.by.training.nc.dev3.dao.UserDaoImpl;
 import main.java.by.training.nc.dev3.exception.CustomGenericException;
-import main.java.by.training.nc.dev3.file.ReplaceFileContents;
 import main.java.by.training.nc.dev3.file.WriteFile;
 import main.java.by.training.nc.dev3.model.Order;
 import main.java.by.training.nc.dev3.model.OrderStatus;
@@ -19,9 +18,8 @@ public class UserServiceImpl implements UserService {
     private User currentUser;
     private List<Order> orderList = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-    private ReturnService returnService = new ReturnService();
+    private ReturnServiceImpl returnService = new ReturnServiceImpl();
     private UserDaoImpl userDao = new UserDaoImpl();
-    //private ReplaceFileContents replaceFileContents = r
 
 
     public UserServiceImpl(User currentUser) {
@@ -97,14 +95,9 @@ public class UserServiceImpl implements UserService {
     }
 
     private void closeOrder(Order order, int idOrder) {
-        //System.out.println("Укажите причину отказа");
-        // order.setClarification(scanner.nextLine());
         order.setStatus(OrderStatus.RENTED);
         returnService.returnMoneyAndCar(order);
         setStatusOrder(order, idOrder, order.getStatus());
-        /*order.setStatus(OrderStatus.REJECTED);
-        orderList.set(idOrder, order);
-        saveChanges();*/
     }
 
     private void extendOrder(Order order, int idOrder) {
@@ -121,9 +114,6 @@ public class UserServiceImpl implements UserService {
             order.setRefundDate(calendar.getTime());
             setStatusOrder(order, idOrder, order.getStatus());
         }
-        /*order.setStatus(OrderStatus.REJECTED);
-        orderList.set(idOrder, order);
-        saveChanges();*/
     }
 
     private void infoAcceptedOrder() {
@@ -140,10 +130,8 @@ public class UserServiceImpl implements UserService {
         System.out.println("Ведите количество USD");
         while (!scanner.hasNextInt()) scanner.next();
         int balance = scanner.nextInt();
-        //ReplaceFileContents replaceFileContents = new ReplaceFileContents();
         currentUser.setBalance(currentUser.getBalance() + balance);
         userDao.update(currentUser);
-        //replaceFileContents.replaceUser("User.txt", currentUser);
         return true;
     }
 
@@ -161,14 +149,11 @@ public class UserServiceImpl implements UserService {
                             if (currentUser.getBalance() < ordersList.get(idOrder).getRepairPrice()) {
                                 System.out.println("Недостаточно средств для оплаты ремонта заказа №" + idOrder);
                             } else {
-                                // ReplaceFileContents replaceFileContents = new ReplaceFileContents();
                                 currentUser.setBalance(currentUser.getBalance() - ordersList.get(idOrder).getRepairPrice());
                                 userDao.update(currentUser);
-                                //replaceFileContents.replaceUser("User.txt", currentUser);
                                 Order order = ordersList.get(idOrder);
                                 order.setStatus(OrderStatus.CLOSED);
                                 orderDao.update(order);
-                                // replaceFileContents.replaceOrder("Order.txt", order);
                                 System.out.println("Оплата за ремонт произведена успешна");
                             }
                             break;
@@ -184,7 +169,6 @@ public class UserServiceImpl implements UserService {
     private void setStatusOrder(Order order, int idOrder, OrderStatus orderStatus) {
         order.setStatus(orderStatus);
         orderList.set(idOrder, order);
-        //saveChanges();
     }
 
     void saveChanges() {
@@ -197,7 +181,7 @@ public class UserServiceImpl implements UserService {
         boolean flag = false;
         for (Order order : ordersList) {
             if (order.getStatus().equals(orderStatus)) {
-                if (order.getClarification().isEmpty()) {
+                if (order.getClarification()==null) {
                     System.out.println(order.toString());
                     flag = true;
                 } else {

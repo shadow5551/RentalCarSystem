@@ -52,12 +52,18 @@ public class AuthorisedAdminEvent extends AuthorisedEvent{
     }
 
     private void rentedCar() {
-        adminService.getListForCategory(super.ordersList,OrderStatus.RENTED);
-        adminService.userOrders(OrderStatus.RENTED);
+        if(adminService.getListForCategory(super.ordersList,OrderStatus.RENTED)){
+        adminService.userOrders(OrderStatus.RENTED);}
+        else {
+            System.out.println("Нет сданных авто");
+        }
     }
 
     private void onHandsCar() {
-        adminService.getListForCategory(super.ordersList,OrderStatus.ACCEPTED);
+        if(!adminService.getListForCategory(super.ordersList,OrderStatus.ACCEPTED))
+        {
+            System.out.println("Нет выданных авто");
+        }
     }
 
     private void userProcessingOrders() {
@@ -69,8 +75,10 @@ public class AuthorisedAdminEvent extends AuthorisedEvent{
     }
 
     private void closedOrders() {
-        adminService.getListForCategory(super.ordersList,OrderStatus.REJECTED);
-        adminService.getListForCategory(super.ordersList,OrderStatus.CLOSED);
+        if (!adminService.getListForCategory(super.ordersList,OrderStatus.REJECTED) ||
+        adminService.getListForCategory(super.ordersList,OrderStatus.CLOSED)){
+            System.out.println("Нет завершенных заказов");
+        }
     }
 
 

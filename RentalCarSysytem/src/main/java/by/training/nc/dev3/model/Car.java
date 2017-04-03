@@ -65,7 +65,7 @@ public class Car implements Serializable{
         return 76+13*idCar;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null) return false;
@@ -75,7 +75,7 @@ public class Car implements Serializable{
         if (!Objects.equals(this.getModel(), otherObj.getModel())) return false;
         if (!Objects.equals(this.getPricePerDay(),otherObj.getPricePerDay())) return false;
         return true;
-    }
+    }*/
 
     @Override
     public String toString() {

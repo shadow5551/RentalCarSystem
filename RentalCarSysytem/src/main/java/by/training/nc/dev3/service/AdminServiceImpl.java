@@ -16,7 +16,7 @@ public class AdminServiceImpl implements AdminService {
     private CarDaoImpl carDao = new CarDaoImpl();
     private List<Order> orderList = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-    private ReturnService returnService = new ReturnService();
+    private ReturnServiceImpl returnService = new ReturnServiceImpl();
 
 
     /**
@@ -145,9 +145,6 @@ public class AdminServiceImpl implements AdminService {
             order.setStatus(OrderStatus.REPAIRED);
             order.setRepairPrice(price);
             setStatusOrder(order, idOrder, order.getStatus());
-        /*order.setStatus(OrderStatus.REPAIRED);
-        orderList.set(idOrder, order);
-        saveChanges();*/
         }
     }
 
@@ -160,13 +157,10 @@ public class AdminServiceImpl implements AdminService {
      */
     private void rejectOrder(Order order, int idOrder) {
         System.out.println("Укажите причину отказа");
-        order.setClarification(scanner.nextLine());
+        order.setClarification(scanner.next());
         returnService.returnMoneyAndCar(order);
         order.setStatus(OrderStatus.REJECTED);
         setStatusOrder(order, idOrder, order.getStatus());
-        /*order.setStatus(OrderStatus.REJECTED);
-        orderList.set(idOrder, order);
-        saveChanges();*/
     }
 
 
@@ -200,7 +194,7 @@ public class AdminServiceImpl implements AdminService {
         boolean flag = false;
         for (Order order : ordersList) {
             if (order.getStatus().equals(orderStatus)) {
-                if (order.getClarification().isEmpty()) {
+                if (order.getClarification()== null) {
                     System.out.println("user:" + order.getUser().getLogin() + "  " + order.toString());
                     flag = true;
                 } else {

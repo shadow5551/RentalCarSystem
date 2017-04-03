@@ -66,8 +66,10 @@ public class AuthorisedUserEvent extends AuthorisedEvent{
     }
 
     private void closedOrders() {
-        userService.getListForCategory(super.ordersList,OrderStatus.REJECTED);
-        userService.getListForCategory(super.ordersList,OrderStatus.CLOSED);
+        if (userService.getListForCategory(super.ordersList,OrderStatus.REJECTED) ||
+        userService.getListForCategory(super.ordersList,OrderStatus.CLOSED)){
+            System.out.println("Нет завершенных заказов");
+        }
     }
 
     private void rentedCar() {
