@@ -1,0 +1,115 @@
+<html>
+<head>
+  <title>The Basics Of Angular 2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Stylesheet -->
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="login.css">
+
+  
+</head>
+<body>
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Best CarRentalSystem</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">Already have an account?</p></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Sign in</b> <span class="caret"></span></a>
+            <ul id="login-dp" class="dropdown-menu">
+                <li>
+                     <div class="row">
+                            <div class="col-md-12">
+                                 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                        <div class="form-group">
+                                             <label class="sr-only" for="exampleInputEmail2">Login</label>
+                                             <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Login" required>
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                             <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                             <div class="help-block text-right"><a href="Login.html">Forget the password ?</a></div>
+                                        </div>
+                                        <div class="form-group">
+                                             <a href="menu.html" button type="submit"  class="btn btn-primary btn-block">Sign in</button></a>
+                                        </div>
+                                 </form>
+                            </div>
+                            <div class="bottom text-center">
+                                New here ? <a href="registration.html"><b>Join Us</b></a>
+                            </div>
+                     </div>
+                </li>
+            </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+    <div class="moon"></div>
+
+    <div class="skyline">
+        <div class="building1-shadow"></div>
+        <div class="building1">
+
+            <div class="building-left-half"></div>
+            <div class="building-right-half"></div>
+        </div>
+    </div>
+    <div class="road">
+        <div class="road-top-half"></div>
+        <div class="road-bottom-half"></div>
+    </div>
+
+    <div class="car-container">
+        <div class="car-top1">
+            <div class="window1"></div>
+            <div class="window2"></div>
+
+        </div>
+        <div class="car-top2">
+            <div class="door">
+                <div class="door-knob"></div>
+            </div>
+        </div>
+        <div class="car-bottom">
+            <div class="wheel1-top"></div>
+            <div class="wheel1">
+                <div class="wheel-dot1"></div>
+                <div class="wheel-dot2"></div>
+                <div class="wheel-dot3"></div>
+                <div class="wheel-dot4"></div>
+
+            </div>
+
+            <div class="wheel2-top"></div>
+            <div class="wheel2">
+                <div class="wheel-dot1"></div>
+                <div class="wheel-dot2"></div>
+                <div class="wheel-dot3"></div>
+                <div class="wheel-dot4"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
